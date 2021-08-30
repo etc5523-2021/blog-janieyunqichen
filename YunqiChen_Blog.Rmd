@@ -1,0 +1,34 @@
+---
+title: "COVID-19 in South Africa"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Yunqi Chen
+    url: +++
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+```{r}
+covidcase_raw <- read_csv(here::here("data", "owid-covid-data.csv")) %>% 
+  filter(location == "South Africa",
+         date > as.Date('2021-01-01'))
+
+case <- covidcase_raw %>% 
+  select(date, total_cases, new_cases, total_deaths,new_deaths)
+
+test <- covidcase_raw %>% 
+  select(total_tests_per_thousand, new_tests_per_thousand, positive_rate)
+
+vaccine <- covidcase_raw %>% 
+  select(total_vaccinations_per_hundred, people_vaccinated_per_hundred, people_fully_vaccinated_per_hundred)
+```
+
+# Reference
+
+Hannah Ritchie, Edouard Mathieu, Lucas Rodés-Guirao, Cameron Appel, Charlie Giattino, Esteban Ortiz-Ospina, Joe Hasell, Bobbie Macdonald, Diana Beltekian and Max Roser (2020) - "Coronavirus Pandemic (COVID-19)". Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/coronavirus' [Online Resource]

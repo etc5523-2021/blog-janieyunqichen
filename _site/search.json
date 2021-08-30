@@ -1,0 +1,26 @@
+{
+  "articles": [
+    {
+      "path": "index.html",
+      "title": "My Blog",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-08-30T14:34:14+08:00"
+    },
+    {
+      "path": "YunqiChen_Blog.html",
+      "title": "COVID-19 in South Africa",
+      "description": "A new article created using the Distill format.\n",
+      "author": [
+        {
+          "name": "Yunqi Chen",
+          "url": "+++"
+        }
+      ],
+      "date": "`r Sys.Date()`",
+      "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\n\n\n\n",
+      "last_modified": "2021-08-30T14:34:46+08:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}
