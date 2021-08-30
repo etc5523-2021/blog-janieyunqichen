@@ -12,9 +12,17 @@ output: distill::distill_article
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+library(gridExtra)
+library(lubridate)
+library(kableExtra)
 ```
 
+# Data Description
+
+
+
 ```{r}
+#Tidy process
 covidcase_raw <- read_csv(here::here("data", "owid-covid-data.csv")) %>% 
   filter(location == "South Africa",
          date > as.Date('2021-01-01'))
@@ -28,6 +36,29 @@ test <- covidcase_raw %>%
 vaccine <- covidcase_raw %>% 
   select(total_vaccinations_per_hundred, people_vaccinated_per_hundred, people_fully_vaccinated_per_hundred)
 ```
+
+# COVID-19 Cases in South Africa
+
+```{r}
+case_month <- case %>% 
+  mutate(month = month(date)) %>% 
+  select(-date)
+
+case_avg_month <- case_month %>% 
+  group_by(month) %>% 
+  summarise(avg_total_cases = scales::comma(round(mean(total_cases))),
+            avg_new_cases = scales::comma(round(mean(new_cases))),
+            avg_total_deaths = scales::comma(round(mean(total_deaths))),
+            avg_new_deaths = round(mean(new_deaths)))
+
+knitr::kable(case_avg_month,
+             table.attr="class='xtab'",
+             col.names = c("Month", "Total Cases", "New Cases", "Total Deaths", "New deaths"),
+             align = "crrrr",
+             caption = "Average COVID-19 Cases and Deaths Cases by Months") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) 
+```
+
 
 # Reference
 
