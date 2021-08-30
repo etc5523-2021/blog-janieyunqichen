@@ -44,21 +44,44 @@ case_month <- case %>%
   mutate(month = month(date)) %>% 
   select(-date)
 
-case_avg_month <- case_month %>% 
+library(sparkline)
+library(DT)
+case_month %>% 
   group_by(month) %>% 
   summarise(avg_total_cases = scales::comma(round(mean(total_cases))),
             avg_new_cases = scales::comma(round(mean(new_cases))),
+            new_cases_trend = spk_chr(total_cases, type = "line"),
             avg_total_deaths = scales::comma(round(mean(total_deaths))),
-            avg_new_deaths = round(mean(new_deaths)))
+            avg_new_deaths = round(mean(new_deaths)),
+            new_deaths_trend = spk_chr(new_deaths, type = "line")) %>% 
+  select(-month) %>% 
+  datatable(escape = FALSE, 
+            options = list(columnDefs = list(list(className = 'dt-right', targets = 0:4))),
+            colnames = c("Month", "Total Cases", "New Cases", "New Cases Trend in A Month","Total Deaths", "New deaths", "New Deaths Trend in A Month"),
+            caption = "Average COVID-19 Cases and Deaths Cases by Months"
+            
+            ) %>%
+  spk_add_deps()
+```
 
+
+```{r, eval=FALSE}
 knitr::kable(case_avg_month,
              table.attr="class='xtab'",
              col.names = c("Month", "Total Cases", "New Cases", "Total Deaths", "New deaths"),
              align = "crrrr",
              caption = "Average COVID-19 Cases and Deaths Cases by Months") %>%
   kable_styling(bootstrap_options = c("striped", "hover")) 
-```
 
+
+  summarise (`Deforestation in hectars` = mean (Deforestation, na.rm = TRUE),
+              Min = min(Deforestation, na.rm = TRUE),
+              Max = max(Deforestation, na.rm = TRUE),
+             `Line graph` = spk_chr(Deforestation, type ="line"),
+             `Boxplot` = spk_chr(Deforestation, type ="box"))%>%  
+  datatable(escape = FALSE, options = c (list(pageLength = 10, digits = 2))) %>%
+  spk_add_deps()
+```
 
 # Reference
 
