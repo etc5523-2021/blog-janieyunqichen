@@ -10,7 +10,7 @@ This assessment is due Fri Sep 3 2021 11.55PM AEST.
 
 My selected country is [South Africa].
 
-The relevant blog post for this assessment is in [https://janieyunqichen.netlify.app/posts/2021-08-31-post1/].html
+The relevant blog post for this assessment is in [https://janieyunqichen.netlify.app/posts/2021-08-31-post1/]
 
 - [ ] Selected a country
 - [ ] Website with R markdown 
