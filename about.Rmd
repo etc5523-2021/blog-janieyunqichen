@@ -1,7 +1,15 @@
 ---
-title: "About this blog"
-description: |
-  Some additional details about the blog
+title: "Yunqi (Janie) Chen "
+image: "https://static.scientificamerican.com/sciam/cache/file/32665E6F-8D90-4567-9769D59E11DB7F26_source.jpg?w=590&h=800&7E4B4CAD-CAE1-4726-93D6A160C2B068B2"
+output:
+  postcards::trestles
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/janie-chen-218861189/"
+  - label: GitHub
+    url: "https://github.com/janieyunqichen"
+  - label: Email
+    url: "yche0454@student.monashl.edu"
 ---
 
 ```{r setup, include=FALSE}

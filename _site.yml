@@ -1,5 +1,5 @@
 name: "YunqiChen_Blog"
-title: "COVID-19 in South Africa"
+title: "Yunqi Chen's Blog"
 description: |
   COVID-19 in South Africa
 output_dir: "_site"
@@ -10,3 +10,4 @@ navbar:
     - text: "About"
       href: about.html
 output: distill::distill_article
+

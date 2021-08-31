@@ -1,25 +1,18 @@
 {
   "articles": [
     {
-      "path": "index.html",
-      "title": "My Blog",
+      "path": "about.html",
+      "title": "Yunqi (Janie) Chen ",
       "author": [],
-      "contents": "\n\n\n\n",
-      "last_modified": "2021-08-30T14:34:14+08:00"
+      "contents": "\n\n          \n          \n          Yunqi Chen's Blog\n          \n          \n          Home\n          About\n          ☰\n          \n          \n      \n        \n          \n            \n              \n            \n              Yunqi (Janie) Chen\n            \n            \n              \n                \n                    \n                      \n                        LinkedIn\n                      \n                    \n                  \n                                    \n                    \n                      \n                        GitHub\n                      \n                    \n                  \n                                    \n                    \n                      \n                        Email\n                      \n                    \n                  \n                                  \n            \n          \n        \n        \n        \n          \n            \n          \n        \n      \n    \n\n    \n      \n        \n          \n            \n              \n            \n              Yunqi (Janie) Chen\n            \n            \n              \n                \n                                    \n                    \n                      LinkedIn\n                    \n                  \n                                    \n                    \n                      GitHub\n                    \n                  \n                                    \n                    \n                      Email\n                    \n                  \n                                  \n              \n            \n            \n              \n            \n        \n      \n    \n\n    \n    \n    ",
+      "last_modified": "2021-08-31T13:58:22+08:00"
     },
     {
-      "path": "YunqiChen_Blog.html",
-      "title": "COVID-19 in South Africa",
-      "description": "A new article created using the Distill format.\n",
-      "author": [
-        {
-          "name": "Yunqi Chen",
-          "url": "+++"
-        }
-      ],
-      "date": "`r Sys.Date()`",
-      "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\n\n\n\n",
-      "last_modified": "2021-08-30T14:34:46+08:00"
+      "path": "index.html",
+      "title": "ETC5523 Assignment by Yunqi Chen",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-08-31T13:58:22+08:00"
     }
   ],
   "collections": ["posts/posts.json"]
