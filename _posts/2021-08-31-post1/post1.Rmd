@@ -26,8 +26,9 @@ library(gt)
 
 # Data Description
 
-This article mainly discusses the COVID-19 situation and affection to South Africa in 2021 (until Aug 29, 2021). The data in this article is downloaded from *Our World in Data*^[Hannah Ritchie, Edouard Mathieu, Lucas Rodés-Guirao, Cameron Appel, Charlie Giattino, Esteban Ortiz-Ospina, Joe Hasell, Bobbie Macdonald, Diana Beltekian and Max Roser (2020) - "Coronavirus Pandemic (COVID-19)". Published online at [OurWorldInData.org](http://ourworldindata.org/). Retrieved from: '[https://ourworldindata.org/coronavirus](https://ourworldindata.org/coronavirus)' [Online Resource]].
+This article discusses the COVID-19 situation and affection to South Africa in 2021 (until Aug 29, 2021). The data in this article is downloaded from *Our World in Data*^[Hannah Ritchie, Edouard Mathieu, Lucas Rodés-Guirao, Cameron Appel, Charlie Giattino, Esteban Ortiz-Ospina, Joe Hasell, Bobbie Macdonald, Diana Beltekian and Max Roser (2020) - "Coronavirus Pandemic (COVID-19)". Published online at [OurWorldInData.org](http://ourworldindata.org/). Retrieved from: '[https://ourworldindata.org/coronavirus](https://ourworldindata.org/coronavirus)' [Online Resource]].
 
+This article uses the data of South Africa from Jan1 2021, to Aug 29, 2021. The data for the first section of *The Fact of COVID-19 Cases in South Africa* contains the date, total cases, new cases, total deaths, and new deaths. The second section of *Nucleic Acid Testing for COVID-19 Situation* data includes the date, total test number per thousand people, new test number per thousand people, and positive rate. The third section of *Covid-19 Vaccination Status* data contains the date, population, and total vaccinations number.
 
 ```{r}
 #Tidy process
