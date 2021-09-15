@@ -1,0 +1,26 @@
+---
+title: "COVID-19 in Iran"
+description: |
+  This article discusses the COVID-19 situation and affection to Iran in 2021 (until Aug 29, 2021).
+author:
+  - name: Yunqi Chen
+date: 09-15-2021
+output:
+  distill::distill_article:
+    code_folding: true
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+covidcase_raw <- read_csv(here::here("data", "owid-covid-data.csv")) %>% 
+  filter(location == "Iran")
+```
+

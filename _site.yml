@@ -1,7 +1,7 @@
 name: "YunqiChen_Blog"
 title: "Yunqi Chen's Blog"
 description: |
-  COVID-19 in South Africa
+  My blog
 output_dir: "_site"
 navbar:
   right:
