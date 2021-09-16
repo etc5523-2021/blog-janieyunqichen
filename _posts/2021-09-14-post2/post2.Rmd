@@ -16,7 +16,7 @@ text-align: justify}
 </style>
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.align='center')
 library(tidyverse)
 library(plotly)
 
@@ -93,9 +93,6 @@ vaccine <- covidcase_raw %>%
                names_to = "Type",
                values_to = "Count")
 
-
-cols <- c("darkorange", "purple", "cyan4")
-
 p2 <- ggplot(vaccine, aes(x = date, y = Count, color = Type))+
   geom_line()+
   geom_point()+
@@ -103,9 +100,10 @@ p2 <- ggplot(vaccine, aes(x = date, y = Count, color = Type))+
        y = "Percentage of Population",
        title = "Vaccination Status in Iran, Apr 2021 to Aug 2021") +
   theme_bw() + 
-  scale_color_manual(values=c("#4A403A", "#A45D5D","#FFC069"))
+  scale_color_manual(values=c("#CC7351", "#DED7B1", "#9DAB86"))
 ggplotly(p2)
 ```
+
 From the figure \@ref(fig:p2), Since Apr 14, 2021, Iranian have started to get vaccinated. Before June, the vaccination doses are not sufficient - the difference between the number of fully vaccinated people and vaccination doses is small.
 
 Since mid-July, the number of vaccination doses increased sharply and the same as the number of partially vaccinated people. This means, from then on, the supply of vaccination doses was increased, and the government may have expanded publicity.

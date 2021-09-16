@@ -6,9 +6,21 @@ html {
   --aside-size:      12px;
   --fig-cap-size:    13px;
 
-  --title-color:     #2D2424;
-  --header-color:    #2D2424;
-  --body-color:      #2D2424;
-  --aside-color:     #2D2424;
-  --fig-cap-color:   #2D2424;
+  --title-color:     #557174;
+  --header-color:    #557174;
+  --body-color:      #112031;
+  --aside-color:     #112031;
+  --fig-cap-color:   #112031;
+}
+
+.distill-site-header {
+  --title-size:       18px;    
+  --text-color:       #F7F7E8; /* edited */
+  --text-size:        15px;
+  --hover-color:      #DED7B1; /* edited */
+  --bkgd-color:       #9DAB86; /* edited */
+}
+
+h1 {
+  font-family: fantasy;
 }

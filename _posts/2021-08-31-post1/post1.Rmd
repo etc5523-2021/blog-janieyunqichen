@@ -10,14 +10,13 @@ output:
     code_folding: true
 ---
 
-
 <style>
 body {
 text-align: justify}
 </style>
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.align="center")
+knitr::opts_chunk$set(echo = TRUE, fig.align='center')
 library(tidyverse)
 library(gridExtra)
 library(lubridate)
