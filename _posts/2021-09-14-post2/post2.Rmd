@@ -14,13 +14,161 @@ output:
 body {
 text-align: justify}
 </style>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(plotly)
+
+#install.packages("coronavirus")
+library(coronavirus)
+#update_dataset()
+
+library(viridis)
+library(tidycovid19)
 ```
+
+# Data Description
 
 ```{r}
 covidcase_raw <- read_csv(here::here("data", "owid-covid-data.csv")) %>% 
   filter(location == "Iran")
+
+df0 <- coronavirus 
+
+df <- coronavirus %>% 
+  filter(country == "Iran") %>% 
+  group_by(type, date) %>%
+  summarise(total_cases = sum(cases)) %>%
+  pivot_wider(names_from = type, values_from = total_cases) %>%
+  arrange(date) %>%
+  mutate(active = confirmed - death - recovered) %>%
+  mutate(active_total = cumsum(active),
+                recovered_total = cumsum(recovered),
+                death_total = cumsum(death)) %>% 
+  select(-c(active, recovered, recovered_total, death)) %>% 
+  rename("Confirmed Cases" = confirmed,
+         "Active Cases"=active_total,
+         "Death Cases"= death_total) %>% 
+  pivot_longer(cols = c(`Confirmed Cases`:`Death Cases`),
+               names_to = "type",
+               values_to = "count")
+df$count<- df$count/1000
+
 ```
 
+The data in this article is downloaded from *Our World in Data*^[Hannah Ritchie, Edouard Mathieu, Lucas Rodés-Guirao, Cameron Appel, Charlie Giattino, Esteban Ortiz-Ospina, Joe Hasell, Bobbie Macdonald, Diana Beltekian and Max Roser (2020) - "Coronavirus Pandemic (COVID-19)". Published online at [OurWorldInData.org](http://ourworldindata.org/). Retrieved from: '[https://ourworldindata.org/coronavirus](https://ourworldindata.org/coronavirus)' [Online Resource]] from Jan1 2020, to Aug 29, 2021.And `coronavirus` package^[Rami Krispin and Jarrett Byrnes (2021). coronavirus: The 2019 Novel Coronavirus COVID-19 (2019-nCoV) Dataset. R package version 0.3.22. https://CRAN.R-project.org/package=coronavirus] from Jan22 2020, to May27, 2021.
+
+# The Fact of COVID-19 Cases in Iran
+
+```{r p1, fig.cap="Coronavirus disease outbreaks twice in December 2020 and May 2021."}
+p1 <- ggplot(df, aes(x = date, y = count, fill = type, text = type))+
+  geom_area()+
+  scale_fill_viridis(discrete = TRUE) +
+  ggtitle("COVID-19 Situation in Iran, Jan 2020 to May 2021") +
+  labs(x = "Time",
+       y = "Thousand People")+
+  theme_bw()
+
+ggplotly(p1)
+```
+
+
+From the figure \@ref(fig:p1), the most obvious finding is the active cases showing a binomial trend with two tops in December 2020 and May 2021. 
+
+The confirmed cases reached peaks before the active cases number reached the peak. This means the coronavirus test is effective. Besides, the active cases are 200-250 times than the confirmed cases. This means that the coronavirus spread very fast, and the control may need to be strengthened.
+
+The death cases show a mineral peak after those two peaks. But generally, the number of death cases is creasing steadily.
+
+# Covid-19 Vaccination Status
+
+```{r p2, fig.cap="Until Aug 24, the vaccination doses are sufficient. 20% of people got at least one dose of vaccine, and 7% of people were fully vaccinated."}
+vaccine <- covidcase_raw %>% 
+  select(date, total_vaccinations, people_vaccinated, people_fully_vaccinated) %>% 
+  na.omit() %>% 
+  mutate("Total Vaccination Doses" = round(total_vaccinations/85028760*100,2),
+         "People Partial Vaccinated"= round(people_vaccinated/85028760*100,2),
+         "People Fully Vaccinated"= round(people_fully_vaccinated/85028760*100,2)) %>% 
+  pivot_longer(cols = c(`Total Vaccination Doses`:`People Fully Vaccinated`),
+               names_to = "Type",
+               values_to = "Count")
+
+
+cols <- c("darkorange", "purple", "cyan4")
+
+p2 <- ggplot(vaccine, aes(x = date, y = Count, color = Type))+
+  geom_line()+
+  geom_point()+
+  labs(x = "Time",
+       y = "Percentage of Population",
+       title = "Vaccination Status in Iran, Apr 2021 to Aug 2021") +
+  theme_bw() + 
+  scale_color_manual(values=c("#4A403A", "#A45D5D","#FFC069"))
+ggplotly(p2)
+```
+From the figure \@ref(fig:p2), Since Apr 14, 2021, Iranian have started to get vaccinated. Before June, the vaccination doses are not sufficient - the difference between the number of fully vaccinated people and vaccination doses is small.
+
+Since mid-July, the number of vaccination doses increased sharply and the same as the number of partially vaccinated people. This means, from then on, the supply of vaccination doses was increased, and the government may have expanded publicity.
+
+# Iran and the neighboring countries
+
+```{r p4, fig.cap="Iran and Turkey have similar trends in new cases and are the highest in the neighboring area."}
+library(tidycovid19)
+plot_covid19_stripes(
+  type = "confirmed",
+  countries = c("IRN", "AFG", "PAK", "TKM", "AZE", "TUR", "IRQ", "UAE", "OMN","SA"),
+  sort_countries = "countries"
+)
+```
+
+As \@ref(fig:p4) indicates, Iran and Turkey have the lightest color, which means they have more new confirmed cases in the neighboring area. According to the latest data, Afghanistan and Oman had put the coronavirus under control. On the contrary, the other countries still have very light colors on the right end.
+
+Some countries show the same trend of coronavirus bursts. Except for Afghanistan and Oman, the other countries all show two peaks in May and July 2021.
+
+```{r p5, fig.cap="Iran had the highest number of coronavirus death cases in the neighboring area."}
+plot_covid19_stripes(
+#  type = "confirmed",
+  countries = c("IRN", "AFG", "PAK", "TKM", "AZE", "TUR", "IRQ", "UAE", "OMN","SA"),
+  sort_countries = "countries"
+)
+```
+
+From the figure \@ref(fig:p5), Iran shows the highest death cases number within the neighboring area. And the death cases were still high in the past few weeks.
+
+Same as the confirmed cases, death cases peaked simultaneously among countries except for Afghanistan and Oman in May and July 2021.
+
+# Reference
+
+## R Packages
+
+- C. Sievert. Interactive Web-Based Data Visualization with
+  R, plotly, and shiny. Chapman and Hall/CRC Florida, 2020.
+
+- Joachim Gassen (2021). tidycovid19: Download, Tidy and
+  Visualize Covid-19 Related Data. R package version
+  0.0.0.9000.
+  
+- Rami Krispin and Jarrett Byrnes (2021). coronavirus: The 2019 Novel
+  Coronavirus COVID-19 (2019-nCoV) Dataset. R package version 0.3.22.
+  https://CRAN.R-project.org/package=coronavirus
+  
+- R Core Team (2020). R: A language and environment for
+  statistical computing. R Foundation for Statistical
+  Computing, Vienna, Austria. URL
+  https://www.R-project.org/.
+  
+- Simon Garnier (2018). viridis: Default Color Maps from
+  'matplotlib'. R package version 0.5.1.
+  https://CRAN.R-project.org/package=viridis
+
+- Wickham et al., (2019). Welcome to the tidyverse. Journal
+  of Open Source Software, 4(43), 1686,
+  https://doi.org/10.21105/joss.01686
+
+## Websites
+
+- Hannah Ritchie, Edouard Mathieu, Lucas Rodés-Guirao, Cameron Appel, Charlie Giattino, Esteban Ortiz-Ospina, Joe Hasell, Bobbie Macdonald, Diana Beltekian and Max Roser (2020) - "Coronavirus Pandemic (COVID-19)". Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/coronavirus' [Online Resource]
+
+
+  
+  
